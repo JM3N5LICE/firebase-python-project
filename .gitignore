@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+
+# This is my projects files that are specific to my project that I don't want you to have. Thank you.
+auth.json
