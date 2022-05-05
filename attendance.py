@@ -38,16 +38,38 @@ def main():
         elif choice == "4":
             delete_student(db)
         
-            
-
-def take_attendance(db):
-    pass
+        
 
 def display_students(db):
-    pass
+    results = db.collection("students").get()
+    
+    print("Search Results:")
+    print(f"{'Student':<20} {'Monday':<10} {'Tuesday':<10} {'Wednesday':<10} {'Thursday':<10} {'Friday':<10}")
+    for result in results:
+        item = result.to_dict()
+        print(f"{result.id:<20} {item['Monday']:<10} {item['Tuesday']:<10} {item['Wednesday']:<10} {item['Thursday']:<10} {item['Friday']:<10}")
+        print()
 
 def modify_student(db):
-    pass
+    student_to_modify = input("Which student would you like to modify? ")
+    student = db.collection("students").document(student_to_modify).get()
+    if not student.exists:
+        print("Warning! \n Please enter a valid student name!")
+        return
+    
+    info = student.to_dict()
+    field = input("Which day do you want to modify? ")
+    print()
+    if field in info:
+        new_field = input("What would you like to update the value to? ")
+        print()
+    else:
+        print("Warning! \n Verify field exists!")
+        return
+
+    db.collection("students").document(student_to_modify).update({field : new_field})
+    print(f"{student_to_modify}'s attendance on {field} changed to {new_field}")
+
 
 def add_student(db):
     student_name = input("Student Name: ")
@@ -56,11 +78,11 @@ def add_student(db):
         print("Error! \n User already exists in database!")
         return
     print("Did the student attend the following days? (y/n)")
-    monday = input("Monday? >")
-    tuesday = input("Tuesday? >")
-    wednesday = input("Wednesday? >")
-    thursday = input("Thursday? >")
-    friday = input("Friday? >")
+    monday = input("Monday? > ")
+    tuesday = input("Tuesday? > ")
+    wednesday = input("Wednesday? > ")
+    thursday = input("Thursday? > ")
+    friday = input("Friday? > ")
 
     db.collection("students").document(student_name).set({
         "Monday" : monday,
