@@ -23,13 +23,13 @@ The tools that I used were firebase, as stated above, python as the language I u
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
+
 * [Firebase Documentation](https://firebase.google.com/docs/reference/admin/python)
 * [Firebase Setup documentation](https://firebase.google.com/docs/firestore/quickstart#python)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
+
 * Use a timestamp to take daily attendance for all students added.
 * A means to have teachers log in.
 * Options to display more things about students such as student ID and grades.
