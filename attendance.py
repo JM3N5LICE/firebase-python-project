@@ -5,6 +5,7 @@ import os
 
 
 def initialize_firestore():
+    """ The parameters to enable firebase and token access. """
     project_id = "attendance-eca04"
 
     cred = credentials.Certificate('auth.json')
@@ -41,6 +42,8 @@ def main():
         
 
 def display_students(db):
+    """ Displays all students in table. """
+
     results = db.collection("students").get()
     
     print("Search Results:")
@@ -51,6 +54,8 @@ def display_students(db):
         print()
 
 def modify_student(db):
+    """ Allows fields (days) to be modifeid. """
+
     student_to_modify = input("Which student would you like to modify? ")
     student = db.collection("students").document(student_to_modify).get()
     if not student.exists:
@@ -72,6 +77,8 @@ def modify_student(db):
 
 
 def add_student(db):
+    """ Adds a student as a document to the collection in firebase with the requisite fields. """
+
     student_name = input("Student Name: ")
     result = db.collection("students").document(student_name).get()
     if result.exists:
@@ -95,6 +102,7 @@ def add_student(db):
     print(f"{student_name} added to 'students'")
 
 def delete_student(db):
+    """ Searches out a specific student and removes them and their fields from the database. """
     print()
     print("Warning! \n All data that is deleted cannot be recovered!")
     print()
